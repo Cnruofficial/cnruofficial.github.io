@@ -5,304 +5,431 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cnruofficial.Player</title>
     <style>
-        body {
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: 'Arial', sans-serif;
-            background-color: #ffffff;
-            color: #333;
         }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #2a0000);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
         .header {
             display: flex;
             align-items: center;
             padding: 20px;
-            background-color: #980000;
-            color: white;
+            background: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
         }
-        .header img {
-            width: 100px;
-            height: auto;
-            margin-right: 20px;
+
+        .logo img {
+            width: 150px;
         }
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
+
+        .title {
+            font-size: 2.5rem;
+            color: #ff0000;
+            margin-left: 20px;
+            opacity: 0;
+            animation: slideUp 1s ease forwards;
         }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
         .container {
+            padding: 100px 20px;
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        .category {
+            margin-bottom: 40px;
+        }
+
+        .category h2 {
+            font-size: 1.8rem;
+            color: #ff0000;
+            cursor: pointer;
+            padding: 10px;
+            background: rgba(255, 0, 0, 0.1);
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .category h2:hover {
+            background: rgba(255, 0, 0, 0.2);
+        }
+
+        .category-content {
+            display: none;
             padding: 20px;
         }
-        .category {
-            margin-bottom: 20px;
-        }
-        .category h2 {
-            cursor: pointer;
-            background-color: #980000;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .category h2:hover {
-            background-color: #b30000;
-        }
-        .content {
-            display: none;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-        .content.active {
+
+        .category-content.show {
             display: block;
         }
+
         .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
             margin-bottom: 10px;
-            padding: 10px;
-            background-color: white;
-            border: 1px solid #ddd;
             border-radius: 5px;
-            transition: transform 0.2s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
+
         .item:hover {
             transform: translateX(10px);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
         }
-        .item a {
-            display: inline-block;
-            margin-top: 5px;
-            padding: 8px 15px;
-            background-color: #980000;
-            color: white;
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-info h3 {
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .item-info p {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .watch-btn {
+            padding: 10px 20px;
+            background: #ff0000;
+            color: #fff;
             text-decoration: none;
-            border-radius: 3px;
-            transition: background-color 0.3s;
+            border-radius: 5px;
+            transition: background 0.3s;
         }
-        .item a:hover {
-            background-color: #b30000;
+
+        .watch-btn:hover {
+            background: #cc0000;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <img src="https://i.postimg.cc/wjdyw25j/Logo-Cnruofficial-online.png" alt="Cnruofficial.Player Logo">
-        <h1>Cnruofficial.Player</h1>
+        <div class="logo">
+            <img src="https://i.postimg.cc/wjdyw25j/Logo-Cnruofficial-online.png" alt="Cnruofficial.Player Logo">
+        </div>
+        <div class="title">Cnruofficial.Player</div>
     </div>
+
     <div class="container">
         <div class="category">
-            <h2 onclick="toggleContent('movies')">Фильмы</h2>
-            <div id="movies" class="content">
+            <h2 onclick="toggleCategory(this)">Фильмы</h2>
+            <div class="category-content">
                 <div class="item">
-                    <h3>Убийство в загадке 2</h3>
-                    <p>Описание: Захватывающий детектив с неожиданными поворотами сюжета.</p>
-                    <a href="http://murder-mystery-2.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Убийство в загадке</h3>
+                        <p>Триллер о запутанном расследовании загадочного убийства.</p>
+                    </div>
+                    <a href="http://murder-mystery-2.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Малышка на драйве</h3>
-                    <p>Описание: Динамичный боевик с яркими сценами погонь.</p>
-                    <a href="https://malyshka-na-drayve-2022-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Малышка на драйве</h3>
+                        <p>Экшен о дерзкой гонщице, которая ввязывается в опасную игру.</p>
+                    </div>
+                    <a href="https://malyshka-na-drayve-2022-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Полётта</h3>
-                    <p>Описание: Весёлая комедия о приключениях пожилой дамы.</p>
-                    <a href="https://poletta-2012-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Полетта</h3>
+                        <p>Комедия о пожилой женщине, которая неожиданно становится наркодилером.</p>
+                    </div>
+                    <a href="https://poletta-2012-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Драйв</h3>
-                    <p>Описание: Напряжённый триллер о жизни на грани.</p>
-                    <a href="https://drive-2023-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Драйв</h3>
+                        <p>Криминальная драма о водителе, ведущем двойную жизнь.</p>
+                    </div>
+                    <a href="https://drive-2023-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Компаньон</h3>
-                    <p>Описание: Трогательная история о дружбе и приключениях.</p>
-                    <a href="https://kompanion-2025-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Компаньон</h3>
+                        <p>Фантастическая история о дружбе человека и искусственного интеллекта.</p>
+                    </div>
+                    <a href="https://kompanion-2025-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
+                </div>
+                <!-- Добавлены остальные фильмы -->
+                <div class="item">
+                    <div class="item-info">
+                        <h3>Домохозяин</h3>
+                        <p>Комедия о жизни современного домохозяина.</p>
+                    </div>
+                    <a href="https://domokhozyain-2025-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Домохозяин</h3>
-                    <p>Описание: Комедия о жизни обычного мужчины.</p>
-                    <a href="https://domokhozyain-2025-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Паразит</h3>
+                        <p>Социальная драма о классовом неравенстве.</p>
+                    </div>
+                    <a href="https://parasite-2019-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Паразит</h3>
-                    <p>Описание: Оскароносная драма о классовом неравенстве.</p>
-                    <a href="https://parasite-2019-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Леди Викторина</h3>
+                        <p>Комедия о женщине, которая участвует в телевикторине.</p>
+                    </div>
+                    <a href="https://ledi-viktorina-2023-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Леди Викторина</h3>
-                    <p>Описание: Интригующий фильм о загадочной женщине.</p>
-                    <a href="https://ledi-viktorina-2023-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Круиз по джунглям</h3>
+                        <p>Приключенческий фильм о путешествии по Амазонке.</p>
+                    </div>
+                    <a href="https://kruiz-po-dzhunglyam-2021-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Круиз по джунглям</h3>
-                    <p>Описание: Приключенческий фильм с элементами комедии.</p>
-                    <a href="https://kruiz-po-dzhunglyam-2021-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Анора</h3>
+                        <p>Драма о сложных человеческих судьбах.</p>
+                    </div>
+                    <a href="https://anora-2024-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Дроп</h3>
-                    <p>Описание: Захватывающий боевик с элементами триллера.</p>
-                    <a href="https://drop-2025-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Чистка</h3>
+                        <p>Боевик о мести и выживании.</p>
+                    </div>
+                    <a href="https://cistka-2025-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Анора</h3>
-                    <p>Описание: Драматическая история о судьбе девушки.</p>
-                    <a href="https://anora-2024-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Оставь мир позади</h3>
+                        <p>Триллер о семье, столкнувшейся с глобальной катастрофой.</p>
+                    </div>
+                    <a href="https://ostav-mir-pozadi-2024-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Чистка</h3>
-                    <p>Описание: Триллер о выживании в экстремальных условиях.</p>
-                    <a href="https://cistka-2025-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Я слежу за тобой</h3>
+                        <p>Психологический триллер о преследовании.</p>
+                    </div>
+                    <a href="https://ya-slezhu-za-toboy-2024-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Новичок: Федералы</h3>
-                    <p>Описание: Захватывающий боевик о работе спецслужб.</p>
-                    <a href="https://novichok-federali-2022-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Дьявол носит Prada</h3>
+                        <p>Комедия о мире моды и амбициях.</p>
+                    </div>
+                    <a href="https://djavol-nosyt-prada-2006-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Оставь мир позади</h3>
-                    <p>Описание: Постапокалиптическая драма о выживании.</p>
-                    <a href="https://ostav-mir-pozadi-2024-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Дело Мальдораль</h3>
+                        <p>Детектив о загадочном преступлении.</p>
+                    </div>
+                    <a href="https://delo-maldoror-2024-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Я слежу за тобой</h3>
-                    <p>Описание: Психологический триллер о паранойе.</p>
-                    <a href="https://ya-slezhu-za-toboy-2024-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Опасная игра: Слоун</h3>
+                        <p>Политический триллер о закулисных интригах.</p>
+                    </div>
+                    <a href="https://opasnaya-igra-sloun-2016-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Дьявол носит Prada</h3>
-                    <p>Описание: Культовый фильм о моде и амбициях.</p>
-                    <a href="https://djavol-nosyt-prada-2006-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Омар</h3>
+                        <p>Драма о жизни в условиях конфликта.</p>
+                    </div>
+                    <a href="https://omar-2024-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Повышение</h3>
-                    <p>Описание: Комедия о карьерных амбициях.</p>
-                    <a href="https://povichenie-2024-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Мать невесты</h3>
+                        <p>Романтическая комедия о свадебных хлопотах.</p>
+                    </div>
+                    <a href="https://mat-nevesty-2024-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Дело Мальдорор</h3>
-                    <p>Описание: Детектив с мрачной атмосферой.</p>
-                    <a href="https://delo-maldoror-2024-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Лето '69</h3>
+                        <p>Драма о молодежи в эпоху перемен.</p>
+                    </div>
+                    <a href="https://leto-69-2025-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Опасная игра Слоун</h3>
-                    <p>Описание: Политический триллер о власти и интригах.</p>
-                    <a href="https://opasnaya-igra-sloun-2016-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Этуаль</h3>
+                        <p>История о стремлении к славе в мире балета.</p>
+                    </div>
+                    <a href="https://etoile-2025-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Омар</h3>
-                    <p>Описание: Драма о сложных человеческих отношениях.</p>
-                    <a href="https://omar-2024-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Пара на праздники</h3>
+                        <p>Романтическая комедия о неожиданной любви.</p>
+                    </div>
+                    <a href="https://para-na-prazdniki-2020-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Мать невесты</h3>
-                    <p>Описание: Романтическая комедия о семейных ценностях.</p>
-                    <a href="https://mat-nevesty-2024-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Мальчик, который обуздал ветер</h3>
+                        <p>Вдохновляющая история о смекалке и упорстве.</p>
+                    </div>
+                    <a href="https://malchik-kotoryy-obuzdal-veter-2019-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Лето '69</h3>
-                    <p>Описание: Ностальгическая драма о юности.</p>
-                    <a href="https://leto-69-2025-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Клаустрофобы</h3</h3>
+                        <p>Триллер о группе людей, оказавшихся в ловушке.</p>
+                    </div>
+                    <a href="https://klaustrofoby-2019-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Этуаль</h3>
-                    <p>Описание: История о стремлении к славе.</p>
-                    <a href="https://etoile-2025-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Клаустрофобы Лига выживших</h3>
+                        <p>Продолжение триллера о смертельной игре.</p>
+                    </div>
+                    <a href="https://klaustrofoby-liga-vyzhivshikh-2021-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Пара на праздники</h3>
-                    <p>Описание: Лёгкая романтическая комедия.</p>
-                    <a href="https://para-na-prazdniki-2020-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Падение Парижа</h3>
+                        <p>Боевик о спасении города от террористов.</p>
+                    </div>
+                    <a href="https://padenie-pariza-2024-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Мальчик, который обуздал ветер</h3>
-                    <p>Описание: Вдохновляющая история о мечте и упорстве.</p>
-                    <a href="https://malchik-kotoryy-obuzdal-veter-2019-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Хороший мальчик</h3>
+                        <p>Драма о взрослении и принятии себя.</p>
+                    </div>
+                    <a href="https://khoroshiy-malchik-2025-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Слабый герой</h3>
-                    <p>Описание: Драма о борьбе с несправедливостью.</p>
-                    <a href="https://slabyy-geroy-2022-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Аванпост</h3>
+                        <p>Фантастический боевик о выживании на Земле.</p>
+                    </div>
+                    <a href="https://avanpost-2019-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Клаустрофобы</h3>
-                    <p>Описание: Напряжённый триллер о выживании.</p>
-                    <a href="https://klaustrofoby-2019-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Аванпост 2</h3>
+                        <p>Продолжение фантастического боевике о борьбе за выживание.</p>
+                    </div>
+                    <a href="https://avanpost-2021-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Клаустрофобы: Лига выживших</h3>
-                    <p>Описание: Продолжение захватывающего триллера.</p>
-                    <a href="https://klaustrofoby-liga-vyzhivshikh-2021-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Джинни и Джорджия</h3>
+                        <p>Драма о жизни матери и дочери в новом городе.</p>
+                    </div>
+                    <a href="https://dzhinni-i-dzhordzhiya-2021-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Падение Парижа</h3>
-                    <p>Описание: Боевик о спасении города.</p>
-                    <a href="https://padenie-pariza-2024-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Джинни и Джорджия 2025</h3>
+                        <p>Продолжение истории о матери и дочери.</p>
+                    </div>
+                    <a href="https://dzhinni-i-dzhordzhiya-2025-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Хороший мальчик</h3>
-                    <p>Описание: Трогательная история о взрослении.</p>
-                    <a href="https://khoroshiy-malchik-2025-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
-                </div>
-                <div class="item">
-                    <h3>Аванпост (2019)</h3>
-                    <p>Описание: Фантастический боевик о борьбе за выживание.</p>
-                    <a href="https://avanpost-2019-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
-                </div>
-                <div class="item">
-                    <h3>Аванпост (2021)</h3>
-                    <p>Описание: Продолжение фантастической саги.</p>
-                    <a href="https://avanpost-2021-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
-                </div>
-                <div class="item">
-                    <h3>Джинни и Джорджия (2021)</h3>
-                    <p>Описание: Драма о семейных отношениях.</p>
-                    <a href="https://dzhinni-i-dzhordzhiya-2021-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
-                </div>
-                <div class="item">
-                    <h3>Парадайз</h3>
-                    <p>Описание: История о жизни в райском уголке.</p>
-                    <a href="https://paradise-2025-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Парадайс</h3>
+                        <p>Драма о поиске рая на Земле.</p>
+                    </div>
+                    <a href="https://paradise-2025-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
             </div>
         </div>
+
         <div class="category">
-            <h2 onclick="toggleContent('series')">Сериалы</h2>
-            <div id="series" class="content">
+            <h2 onclick="toggleCategory(this)">Сериалы</h2>
+            <div class="category-content">
                 <div class="item">
-                    <h3>Высокий потенциал</h3>
-                    <p>Описание: Сериал о гениальной женщине, раскрывающей преступления.</p>
-                    <a href="https://high-potential-2024-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Высокий потенциал</h3>
+                        <p>Сериал о гениальной женщине, работающей с полицией.</p>
+                    </div>
+                    <a href="https://high-potential-2024-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Вне юрисдикции</h3>
-                    <p>Описание: Захватывающий детективный сериал.</p>
-                    <a href="https://vne-yourizdikciji-2025-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Вне юрисдикции</h3>
+                        <p>Криминальный сериал о нестандартных методах расследования.</p>
+                    </div>
+                    <a href="https://vne-yourizdikciji-2025-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Снова в деле</h3>
-                    <p>Описание: Комедийный сериал о возвращении к работе.</p>
-                    <a href="https://snova-v-dele-2025-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Снова в деле</h3>
+                        <p>Комедийный сериал о возвращении детектива на службу.</p>
+                    </div>
+                    <a href="https://snova-v-dele-2025-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Дружеское соперничество</h3>
-                    <p>Описание: Сериал о конкуренции и дружбе.</p>
-                    <a href="https://druzheskoye-sopernichestvo-2025-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Дружеское соперничество</h3>
+                        <p>Драма о конкуренции между друзьями.</p>
+                    </div>
+                    <a href="https://druzheskoye-sopernichestvo-2025-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Два холма (3 сезон)</h3>
-                    <p>Описание: Продолжение популярной комедийной саги.</p>
-                    <a href="https://dva-xolma-3sezon-2025-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Дроп</h3>
+                        <p>Сериал о жизни в условиях криминального мира.</p>
+                    </div>
+                    <a href="https://drop-2025-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
                 <div class="item">
-                    <h3>Джинни и Джорджия (2025)</h3>
-                    <p>Описание: Новый сезон драмы о матери и дочери.</p>
-                    <a href="https://dzhinni-i-dzhordzhiya-2025-video-player.cnruofficial.online/" target="_blank">Смотреть в плеере</a>
+                    <div class="item-info">
+                        <h3>Новичок: Федералы</h3>
+                        <p>Сериал о новобранцах в ФБР.</p>
+                    </div>
+                    <a href="https://novichok-federali-2022-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <h3>Повышение</h3>
+                        <p>Комедия о карьерных амбициях в офисе.</p>
+                    </div>
+                    <a href="https://povichenie-2024-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <h3>Слабый герой</h3>
+                        <p>Драма о подростке, который борется с несправедливостью.</p>
+                    </div>
+                    <a href="https://slabyy-geroy-2022-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
+                </div>
+                <div class="item">
+                    <div class="item-info">
+                        <h3>Два холма: 3 сезон</h3>
+                        <p>Комедийный сериал о жизни в элитном поселке.</p>
+                    </div>
+                    <a href="https://dva-xolma-3sezon-2025-video-player.cnruofficial.online/" class="watch-btn">Смотреть в плеере</a>
                 </div>
             </div>
         </div>
     </div>
+
     <script>
-        function toggleContent(id) {
-            const content = document.getElementById(id);
-            content.classList.toggle('active');
+        function toggleCategory(element) {
+            const content = element.nextElementSibling;
+            content.toggleClass('show');
         }
     </script>
 </body>
-  </html>
+    </html>
